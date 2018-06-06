@@ -7,7 +7,7 @@ function MoveThatDiv(selector){
   var defaultSettingsShake = {
     selector: '',
     tiltAngle: 10, // The deg to which the shake moves at max
-    speed: 50 //The speed at which the shake moves in ms
+    speed: 10 //The speed at which the shake moves in ms
   };
 
   /**
@@ -18,7 +18,7 @@ function MoveThatDiv(selector){
     selector: '',
     colorInner: 'blue',
     colorOuter: 'darkBlue',
-    speed: 100
+    speed: 10
   };
 
   var self = {};
@@ -98,12 +98,12 @@ function MoveThatDiv(selector){
     counterList[lengthIn].waitBool = waiting;
     counterList[lengthIn].nmb = nmb;
     console.log(el);
-    el.style.background ='radial-gradient(red '+nmb+', green 100%)';
+    el.style.background ='radial-gradient('+defaultSettingsGradient.colorInner+' '+ counterList[lengthIn].nmb +'%, '+defaultSettingsGradient.colorOuter+' 100%)';
     // el.style.background = 'red';
   };
 
   self.customShake = function(){
-    defaultSettingsShake.selector = self || defaultSettingsShake.selector;
+    // defaultSettingsShake.selector = self || defaultSettingsShake.selector;
     element = document.querySelector(self.selector);
     counter = new Object;
     counter.nmb = 0;
@@ -121,7 +121,7 @@ function MoveThatDiv(selector){
    * @return {[type]}          [description]
    */
   self.customGradient = function(){
-    defaultSettingsGradient = self || defaultSettingsGradient.selector;
+    // defaultSettingsGradient.selector = self || defaultSettingsGradient.selector;
     element = document.querySelector(self.selector);
     counter = new Object;
     counter.nmb = 0;
