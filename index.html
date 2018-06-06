@@ -1,0 +1,42 @@
+<html>
+<header>
+  <title>Test script</title>
+  <script src="script.js" type="application/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+</header>
+<body>
+  <div class="shake moveIt">
+    <p>
+      Shake 1
+    </p>
+  </div>
+  <div class="shake moveIt3">
+    <p>
+      Shake 2
+    </p>
+  </div>
+  <div class="shake moveIt4">
+    <p>
+      gradient 3ss
+    </p>
+  </div>
+  <div class="shake moveIt2">
+    <p>
+      gradient 4
+    </p>
+  </div>
+  <script>
+    var shake = new MoveThatDiv();
+    shake.customShake('.moveIt', {tiltAngle: 5, speed: 1});
+    var shake5 = new MoveThatDiv();
+    shake5.customGradient('.moveIt');
+    var shake3 = new MoveThatDiv();
+    shake3.customShake('.moveIt3');
+    var shake2 = new MoveThatDiv();
+    shake2.customGradient('.moveIt2', {colorInner: 'red', colorOuter: 'green', speed: 1});
+    var shake4 = new MoveThatDiv();
+    shake4.customGradient('.moveIt4');
+
+  </script>
+</body>
+</html>
