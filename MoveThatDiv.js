@@ -5,7 +5,6 @@ function MoveThatDiv(selector){
    * @type {{selector: string, tiltAngle: number, speed: number}}
    */
   var defaultSettingsShake = {
-    selector: '',
     tiltAngle: 10, // The deg to which the shake moves at max
     speed: 10 //The speed at which the shake moves in ms
   };
@@ -15,7 +14,6 @@ function MoveThatDiv(selector){
    * @type {{selector: string, colorInner: string, colorOuter: string, speed: number}}
    */
   var defaultSettingsGradient = {
-    selector: '',
     colorInner: 'blue', // color in string
     colorOuter: 'darkBlue', // color in string
     speed: 100 // speed of the percentage in ms
