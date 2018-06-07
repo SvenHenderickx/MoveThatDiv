@@ -144,8 +144,12 @@ function MoveThatDiv(selector){
   };
 
   /**
-   * the function which applies the gradient
-   * @return {[type]} [description]
+   * The logic behind the moving gradient, this is a new function. Old one isn't used any more because it only worked with 1 element
+   * @param  {[type]} input    [description]
+   * @param  {[type]} lengthIn [description]
+   * @param  {[type]} el       [description]
+   * @param  {[type]} settings [description]
+   * @return {[type]}          [description]
    */
   var moveGradientAll = function(input, lengthIn, el, settings){
     var i;
@@ -172,6 +176,12 @@ function MoveThatDiv(selector){
 
   };
 
+  /**
+   * Merges the settings into 1 object where it differs
+   * @param  {[Object]} object1 defaultSettings
+   * @param  {[Object]} object2 new settings
+   * @return {[object]} The new settings mixed with default
+   */
   var mergeObjects  = function(object1, object2) {
         for (var attrname in object1) {
             if(object2.hasOwnProperty(attrname)) {
@@ -182,7 +192,13 @@ function MoveThatDiv(selector){
     };
 
 
+  /**
+  * You can call this function from outside out the scope, this will make the element selected a custom gradient.
+  * @param  {[Object]} settings parameter where you can enter you custom settings, can also be left empty for defaults
+  * @return {[HTMLElement]} returns the element which it changes
+  */
   self.customShake = function(settings){
+    // Checks for new settings and leaves default if not entered
     var newSettings;
     if(settings != null){
        newSettings = mergeObjects(defaultSettingsShake, settings);
@@ -192,7 +208,10 @@ function MoveThatDiv(selector){
     }
 
     defaultSettingsShakeList.push(newSettings);
+
     element = document.querySelectorAll(self.selector);
+
+    //new object with neccesary variables
     counter = new Object;
     counter.nmb = 0;
     counter.waitBool = false;
@@ -203,12 +222,12 @@ function MoveThatDiv(selector){
   };
 
   /**
-   * The function which you can call when you want to apply the custom gradient
-   * @param  {[type]} selector [description]
-   * @param  {[type]} settings [description]
-   * @return {[type]}          [description]
+   * You can call this function from outside out the scope, this will make the element selected a custom gradient.
+   * @param  {[Object]} settings parameter where you can enter you custom settings, can also be left empty for defaults
+   * @return {[HTMLElement]} returns the element which it changes
    */
   self.customGradient = function(settings){
+    // Checks for new settings and leaves default if not entered
     var newSettings;
     if(settings != null){
        newSettings = mergeObjects(defaultSettingsGradient, settings);
@@ -219,6 +238,8 @@ function MoveThatDiv(selector){
 
     defaultSettingsGradientList.push(newSettings);
     element = document.querySelectorAll(self.selector);
+
+    //new object with neccesary variables
     counter = new Object;
     counter.nmb = 0;
     counterList.push(counter);
