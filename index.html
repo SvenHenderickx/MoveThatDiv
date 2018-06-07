@@ -11,7 +11,7 @@
       Shake 1
     </p>
   </div>
-  <div class="shake moveIt">
+  <div class="shake moveIt2">
     <p>
       Shake 2
     </p>
@@ -38,9 +38,10 @@
     // var shake4 = new MoveThatDiv();
     // shake4.customGradient('.moveIt4');
 
-    MoveThatDiv('.moveIt').customGradient();
-    MoveThatDiv('.moveIt2').customShake();
-    MoveThatDiv('.moveIt3').customShake().customGradient();
+    // MoveThatDiv('.moveIt').customGradient().customShake();
+    MoveThatDiv('.moveIt2').customShake({speed: 1, tiltAngle: 5});
+    MoveThatDiv('.moveIt').customShake();
+    // MoveThatDiv('.moveIt3').customShake().customGradient();
   </script>
 </body>
 </html>

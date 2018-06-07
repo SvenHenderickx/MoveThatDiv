@@ -6,8 +6,8 @@ function MoveThatDiv(selector){
    */
   var defaultSettingsShake = {
     selector: '',
-    tiltAngle: 50, // The deg to which the shake moves at max
-    speed: 20 //The speed at which the shake moves in ms
+    tiltAngle: 10, // The deg to which the shake moves at max
+    speed: 10 //The speed at which the shake moves in ms
   };
 
   /**
@@ -18,8 +18,10 @@ function MoveThatDiv(selector){
     selector: '',
     colorInner: 'blue', // color in string
     colorOuter: 'darkBlue', // color in string
-    speed: 10 // speed of the percentage in ms
+    speed: 100 // speed of the percentage in ms
   };
+
+  var defaultSettingsShakeList = [];
 
   /**
    * Makes it able to use a function upon itself
@@ -55,7 +57,7 @@ function MoveThatDiv(selector){
     // el = el;
     var counterNumber = input.nmb;
     var waiting = input.waitBool;
-    console.log(counterNumber);
+
     if(counterNumber < defaultSettingsShake.tiltAngle && !waiting){
       counterNumber = counterNumber + 1;
     }
@@ -66,8 +68,7 @@ function MoveThatDiv(selector){
         waiting = false;
       }
     }
-    console.log(counterNumber);
-    console.log(counterList[lengthIn]);
+
     counterList[lengthIn].nmb = counterNumber;
     counterList[lengthIn].waitBool = waiting;
 
@@ -84,25 +85,24 @@ function MoveThatDiv(selector){
   * the function which applies the shake
   * @return {[type]} [description]
   */
-  var shakeAll = function(input, lengthIn, el){
+  var shakeAll = function(input, lengthIn, el, settings){
     // el = el;
     var i;
     for(i = 0; i < el.length; i++){
       var counterNumber = input.nmb;
       var waiting = input.waitBool;
-      console.log(counterNumber);
-      if(counterNumber < defaultSettingsShake.tiltAngle && !waiting){
+
+      if(counterNumber < settings.tiltAngle && !waiting){
         counterNumber = counterNumber + 1;
       }
       else{
         waiting = true;
         counterNumber = counterNumber - 1;
-        if(counterNumber === 0 - defaultSettingsShake.tiltAngle){
+        if(counterNumber === 0 - settings.tiltAngle){
           waiting = false;
         }
       }
-      console.log(counterNumber);
-      console.log(counterList[lengthIn]);
+
       counterList[lengthIn].nmb = counterNumber;
       counterList[lengthIn].waitBool = waiting;
 
@@ -124,7 +124,7 @@ function MoveThatDiv(selector){
   var moveGradient = function(input, lengthIn, el){
     var nmb = input.nmb;
     var waiting = input.waitBool;
-    console.log(nmb);
+
     // console.log("test");
     if(nmb < 100 && !waiting){
       nmb = nmb + 1;
@@ -138,7 +138,7 @@ function MoveThatDiv(selector){
     }
     counterList[lengthIn].waitBool = waiting;
     counterList[lengthIn].nmb = nmb;
-    console.log(el);
+
     el.style.background ='radial-gradient('+defaultSettingsGradient.colorInner+' '+ counterList[lengthIn].nmb +'%, '+defaultSettingsGradient.colorOuter+' 100%)';
     // el.style.background = 'red';
   };
@@ -154,7 +154,6 @@ function MoveThatDiv(selector){
       var nmb = input.nmb;
       var waiting = input.waitBool;
 
-      console.log(nmb);
       // console.log("test");
       if(nmb < 100 && !waiting){
         nmb = nmb + 1;
@@ -168,21 +167,37 @@ function MoveThatDiv(selector){
       }
       counterList[lengthIn].waitBool = waiting;
       counterList[lengthIn].nmb = nmb;
-      console.log(el);
       el[i].style.background ='radial-gradient('+defaultSettingsGradient.colorInner+' '+ counterList[lengthIn].nmb +'%, '+defaultSettingsGradient.colorOuter+' 100%)';
     }
 
   };
 
-  self.customShake = function(){
-    // defaultSettingsShake.selector = self || defaultSettingsShake.selector;
+  var mergeObjects  = function(object1, object2) {
+        for (var attrname in object1) {
+            if(object2.hasOwnProperty(attrname)) {
+                object1[attrname] = object2[attrname];
+            }
+        }
+        return object1;
+    };
+
+  self.customShake = function(settings){
+    var newSettings;
+    if(settings != null){
+       newSettings = mergeObjects(defaultSettingsShake, settings);
+    }
+    else{
+      newSettings = defaultSettingsShake;
+    }
+    console.log(newSettings);
+    defaultSettingsShakeList.push(newSettings);
     element = document.querySelectorAll(self.selector);
     counter = new Object;
     counter.nmb = 0;
     counter.waitBool = false;
     counterList.push(counter);
-    console.log(counterList[counterList.length - 1]);
-    setInterval(shakeAll, defaultSettingsShake.speed, counterList[counterList.length - 1], counterList.length - 1, element);
+
+    setInterval(shakeAll, newSettings.speed, counterList[counterList.length - 1], counterList.length - 1, element, defaultSettingsShakeList[defaultSettingsShakeList.length - 1]);
     return self;
   };
 
@@ -198,7 +213,7 @@ function MoveThatDiv(selector){
     counter = new Object;
     counter.nmb = 0;
     counterList.push(counter);
-    console.log(counterList[counterList.length - 1]);
+
     setInterval(moveGradientAll, defaultSettingsGradient.speed, counterList[counterList.length - 1], counterList.length - 1, element);
     return self;
   };
