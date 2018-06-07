@@ -6,22 +6,22 @@
   <link rel="stylesheet" type="text/css" href="style.css"/>
 </header>
 <body>
-  <div class="shake moveIt">
+  <div class="shake">
     <p>
       Shake 1
     </p>
   </div>
-  <div class="shake moveIt3">
+  <div class="shake moveIt">
     <p>
       Shake 2
     </p>
   </div>
-  <div class="shake moveIt">
+  <div class="shake">
     <p>
       gradient 3ss
     </p>
   </div>
-  <div class="shake moveIt2">
+  <div class="shake moveIt">
     <p>
       gradient 4
     </p>
@@ -41,10 +41,8 @@
     // MoveThatDiv('.moveIt').customShake();
     // oveThatDiv('.moveIt2').customShake();
     // MoveThatDiv('.moveIt3').customGradient();
-    MoveThatDiv('.moveIt').customShake().customGradient();
-    MoveThatDiv('.moveIt2').customShake();
-    MoveThatDiv('.moveIt3').customGradient();
-
+    MoveThatDiv('.moveIt').customGradient();
+    MoveThatDiv('.shake').customShake();
   </script>
 </body>
 </html>

@@ -81,6 +81,43 @@ function MoveThatDiv(selector){
   };
 
   /**
+  * the function which applies the shake
+  * @return {[type]} [description]
+  */
+  var shakeAll = function(input, lengthIn, el){
+    // el = el;
+    var i;
+    for(i = 0; i < el.length; i++){
+      var counterNumber = input.nmb;
+      var waiting = input.waitBool;
+      console.log(counterNumber);
+      if(counterNumber < defaultSettingsShake.tiltAngle && !waiting){
+        counterNumber = counterNumber + 1;
+      }
+      else{
+        waiting = true;
+        counterNumber = counterNumber - 1;
+        if(counterNumber === 0 - defaultSettingsShake.tiltAngle){
+          waiting = false;
+        }
+      }
+      console.log(counterNumber);
+      console.log(counterList[lengthIn]);
+      counterList[lengthIn].nmb = counterNumber;
+      counterList[lengthIn].waitBool = waiting;
+
+      el[i].style.webkitTransform = 'rotate('+counterNumber+'deg)';
+      el[i].style.mozTransform    = 'rotate('+counterNumber+'deg)';
+      el[i].style.msTransform     = 'rotate('+counterNumber+'deg)';
+      el[i].style.oTransform      = 'rotate('+counterNumber+'deg)';
+      el[i].style.transform       = 'rotate('+counterNumber+'deg)';
+
+      el[i].style.backgroundColor = 'red';
+    }
+
+  };
+
+  /**
    * the function which applies the gradient
    * @return {[type]} [description]
    */
@@ -106,15 +143,46 @@ function MoveThatDiv(selector){
     // el.style.background = 'red';
   };
 
+  /**
+   * the function which applies the gradient
+   * @return {[type]} [description]
+   */
+  var moveGradientAll = function(input, lengthIn, el){
+
+    var i;
+    for(i = 0; i < el.length; i++){
+      var nmb = input.nmb;
+      var waiting = input.waitBool;
+
+      console.log(nmb);
+      // console.log("test");
+      if(nmb < 100 && !waiting){
+        nmb = nmb + 1;
+      }
+      else{
+        waiting = true;
+        nmb = nmb - 1;
+        if(nmb === 0){
+          waiting = false;
+        }
+      }
+      counterList[lengthIn].waitBool = waiting;
+      counterList[lengthIn].nmb = nmb;
+      console.log(el);
+      el[i].style.background ='radial-gradient('+defaultSettingsGradient.colorInner+' '+ counterList[lengthIn].nmb +'%, '+defaultSettingsGradient.colorOuter+' 100%)';
+    }
+
+  };
+
   self.customShake = function(){
     // defaultSettingsShake.selector = self || defaultSettingsShake.selector;
-    element = document.querySelector(self.selector);
+    element = document.querySelectorAll(self.selector);
     counter = new Object;
     counter.nmb = 0;
     counter.waitBool = false;
     counterList.push(counter);
     console.log(counterList[counterList.length - 1]);
-    setInterval(shake, defaultSettingsShake.speed, counterList[counterList.length - 1], counterList.length - 1, element);
+    setInterval(shakeAll, defaultSettingsShake.speed, counterList[counterList.length - 1], counterList.length - 1, element);
     return self;
   };
 
@@ -126,12 +194,12 @@ function MoveThatDiv(selector){
    */
   self.customGradient = function(){
     // defaultSettingsGradient.selector = self || defaultSettingsGradient.selector;
-    element = document.querySelector(self.selector);
+    element = document.querySelectorAll(self.selector);
     counter = new Object;
     counter.nmb = 0;
     counterList.push(counter);
     console.log(counterList[counterList.length - 1]);
-    setInterval(moveGradient, defaultSettingsGradient.speed, counterList[counterList.length - 1], counterList.length - 1, element);
+    setInterval(moveGradientAll, defaultSettingsGradient.speed, counterList[counterList.length - 1], counterList.length - 1, element);
     return self;
   };
 
