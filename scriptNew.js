@@ -23,6 +23,8 @@ function MoveThatDiv(selector){
 
   var defaultSettingsShakeList = [];
 
+  var defaultSettingsGradientList = [];
+
   /**
    * Makes it able to use a function upon itself
    * @type {Object}
@@ -111,8 +113,6 @@ function MoveThatDiv(selector){
       el[i].style.msTransform     = 'rotate('+counterNumber+'deg)';
       el[i].style.oTransform      = 'rotate('+counterNumber+'deg)';
       el[i].style.transform       = 'rotate('+counterNumber+'deg)';
-
-      el[i].style.backgroundColor = 'red';
     }
 
   };
@@ -147,8 +147,7 @@ function MoveThatDiv(selector){
    * the function which applies the gradient
    * @return {[type]} [description]
    */
-  var moveGradientAll = function(input, lengthIn, el){
-
+  var moveGradientAll = function(input, lengthIn, el, settings){
     var i;
     for(i = 0; i < el.length; i++){
       var nmb = input.nmb;
@@ -165,9 +164,10 @@ function MoveThatDiv(selector){
           waiting = false;
         }
       }
+
       counterList[lengthIn].waitBool = waiting;
       counterList[lengthIn].nmb = nmb;
-      el[i].style.background ='radial-gradient('+defaultSettingsGradient.colorInner+' '+ counterList[lengthIn].nmb +'%, '+defaultSettingsGradient.colorOuter+' 100%)';
+      el[i].style.background ='radial-gradient('+settings.colorInner+' '+ counterList[lengthIn].nmb +'%, '+settings.colorOuter+' 100%)';
     }
 
   };
@@ -181,6 +181,7 @@ function MoveThatDiv(selector){
         return object1;
     };
 
+
   self.customShake = function(settings){
     var newSettings;
     if(settings != null){
@@ -189,7 +190,7 @@ function MoveThatDiv(selector){
     else{
       newSettings = defaultSettingsShake;
     }
-    console.log(newSettings);
+
     defaultSettingsShakeList.push(newSettings);
     element = document.querySelectorAll(self.selector);
     counter = new Object;
@@ -207,14 +208,22 @@ function MoveThatDiv(selector){
    * @param  {[type]} settings [description]
    * @return {[type]}          [description]
    */
-  self.customGradient = function(){
-    // defaultSettingsGradient.selector = self || defaultSettingsGradient.selector;
+  self.customGradient = function(settings){
+    var newSettings;
+    if(settings != null){
+       newSettings = mergeObjects(defaultSettingsGradient, settings);
+    }
+    else{
+      newSettings = defaultSettingsGradient;
+    }
+
+    defaultSettingsGradientList.push(newSettings);
     element = document.querySelectorAll(self.selector);
     counter = new Object;
     counter.nmb = 0;
     counterList.push(counter);
 
-    setInterval(moveGradientAll, defaultSettingsGradient.speed, counterList[counterList.length - 1], counterList.length - 1, element);
+    setInterval(moveGradientAll, newSettings.speed, counterList[counterList.length - 1], counterList.length - 1, element, defaultSettingsGradientList[defaultSettingsGradientList.length - 1]);
     return self;
   };
 

@@ -8,22 +8,27 @@
 <body>
   <div class="shake moveIt3">
     <p>
-      Shake 1
+      Example
+    </p>
+  </div>
+  <div class="shake moveIt3">
+    <p>
+      Example
     </p>
   </div>
   <div class="shake moveIt2">
     <p>
-      Shake 2
+      settings
     </p>
   </div>
-  <div class="shake">
+  <div class="shake test">
     <p>
-      gradient 3ss
+      settings
     </p>
   </div>
   <div class="shake moveIt2">
     <p>
-      gradient 4
+      settings
     </p>
   </div>
   <script>
@@ -38,10 +43,10 @@
     // var shake4 = new MoveThatDiv();
     // shake4.customGradient('.moveIt4');
 
-    // MoveThatDiv('.moveIt').customGradient().customShake();
-    MoveThatDiv('.moveIt2').customShake({speed: 1, tiltAngle: 5});
-    MoveThatDiv('.moveIt').customShake();
-    // MoveThatDiv('.moveIt3').customShake().customGradient();
+    MoveThatDiv('.moveIt2').customShake({speed: 100, tiltAngle: 20}).customGradient({speed: 200});
+    MoveThatDiv('.moveIt3').customShake();
+    MoveThatDiv('.test').customGradient({speed: 10, colorInner: 'lightBlue'});
+    MoveThatDiv('.test').customShake();
   </script>
 </body>
 </html>
