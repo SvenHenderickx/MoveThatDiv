@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="style.css"/>
 </header>
 <body>
-  <div class="shake">
+  <div class="shake moveIt3">
     <p>
       Shake 1
     </p>
@@ -21,7 +21,7 @@
       gradient 3ss
     </p>
   </div>
-  <div class="shake moveIt">
+  <div class="shake moveIt2">
     <p>
       gradient 4
     </p>
@@ -38,11 +38,9 @@
     // var shake4 = new MoveThatDiv();
     // shake4.customGradient('.moveIt4');
 
-    // MoveThatDiv('.moveIt').customShake();
-    // oveThatDiv('.moveIt2').customShake();
-    // MoveThatDiv('.moveIt3').customGradient();
     MoveThatDiv('.moveIt').customGradient();
-    MoveThatDiv('.shake').customShake();
+    MoveThatDiv('.moveIt2').customShake();
+    MoveThatDiv('.moveIt3').customShake().customGradient();
   </script>
 </body>
 </html>
