@@ -19,8 +19,16 @@ function MoveThatDiv(selector){
     speed: 100 // speed of the percentage in ms
   };
 
+  /**
+   * The list which the settings are stored in for the shake.
+   * @type {Array} Array of objects
+   */
   var defaultSettingsShakeList = [];
 
+  /**
+   * The list which the settings are stored in for the gradient.
+   * @type {Array} Array of objects
+   */
   var defaultSettingsGradientList = [];
 
   /**
@@ -33,7 +41,7 @@ function MoveThatDiv(selector){
 
   /**
    * The list which stores all the counters which are used to count the angle and percentage
-   * @type {Array}
+   * @type {Array} Array
    */
    var counterList = [];
 
@@ -50,7 +58,7 @@ function MoveThatDiv(selector){
    var updateScreen;
 
   /**
-  * the function which applies the shake
+  * the function which applies the shake, old function. Isn't used anymore. Can't use custom settings here and doesn't apply the effect on all the elemnts with the same selector
   * @return {[type]} [description]
   */
   var shake = function(input, lengthIn, el){
@@ -82,16 +90,21 @@ function MoveThatDiv(selector){
   };
 
   /**
-  * the function which applies the shake
-  * @return {[type]} [description]
-  */
+   * The function which contains the logic of the shake effect
+   * @param  {[type]} input    Is the object of the custom counter and waiting bool
+   * @param  {[type]} lengthIn The location of the object in the array
+   * @param  {[type]} el       The element which the effect applies on
+   * @param  {[type]} settings The custom settings as an object
+   */
   var shakeAll = function(input, lengthIn, el, settings){
-    // el = el;
+
     var i;
+    //This loops through all the elements which match the selector and applies the effect to it
     for(i = 0; i < el.length; i++){
       var counterNumber = input.nmb;
       var waiting = input.waitBool;
 
+      //Makes the shake go up until it reaches max, then goes all the way back until it matches the degree
       if(counterNumber < settings.tiltAngle && !waiting){
         counterNumber = counterNumber + 1;
       }
@@ -103,9 +116,11 @@ function MoveThatDiv(selector){
         }
       }
 
+      //Saves the new numbers to the object in the list
       counterList[lengthIn].nmb = counterNumber;
       counterList[lengthIn].waitBool = waiting;
 
+      //The css which is needed applied
       el[i].style.webkitTransform = 'rotate('+counterNumber+'deg)';
       el[i].style.mozTransform    = 'rotate('+counterNumber+'deg)';
       el[i].style.msTransform     = 'rotate('+counterNumber+'deg)';
@@ -116,7 +131,7 @@ function MoveThatDiv(selector){
   };
 
   /**
-   * the function which applies the gradient
+   * the function which applies the gradient, old function. Isn't used anymore. Can't use custom settings here and doesn't apply the effect on all the elemnts with the same selector
    * @return {[type]} [description]
    */
   var moveGradient = function(input, lengthIn, el){
@@ -143,19 +158,19 @@ function MoveThatDiv(selector){
 
   /**
    * The logic behind the moving gradient, this is a new function. Old one isn't used any more because it only worked with 1 element
-   * @param  {[type]} input    [description]
-   * @param  {[type]} lengthIn [description]
-   * @param  {[type]} el       [description]
-   * @param  {[type]} settings [description]
-   * @return {[type]}          [description]
+   * @param  {[type]} input    Is the object of the custom counter and waiting bool
+   * @param  {[type]} lengthIn The location of the object in the array
+   * @param  {[type]} el       The element which the effect applies on
+   * @param  {[type]} settings The custom settings as an object
    */
   var moveGradientAll = function(input, lengthIn, el, settings){
     var i;
+    //Loops through all of the elements which match the same selector
     for(i = 0; i < el.length; i++){
       var nmb = input.nmb;
       var waiting = input.waitBool;
 
-      // console.log("test");
+      //Adds 1 to the percentage untill 100%, then goes back to 0
       if(nmb < 100 && !waiting){
         nmb = nmb + 1;
       }
@@ -167,8 +182,11 @@ function MoveThatDiv(selector){
         }
       }
 
+      //Saves the new numbers to the object
       counterList[lengthIn].waitBool = waiting;
       counterList[lengthIn].nmb = nmb;
+
+      //CSS which is used for the effect
       el[i].style.background ='radial-gradient('+settings.colorInner+' '+ counterList[lengthIn].nmb +'%, '+settings.colorOuter+' 100%)';
     }
 
