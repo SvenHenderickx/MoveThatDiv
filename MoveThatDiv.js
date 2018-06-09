@@ -233,6 +233,7 @@ function MoveThatDiv(selector){
     counter.waitBool = false;
     counterList.push(counter);
 
+    //Sets the interval so the effect is able to move, parameters of the shakeAll function are put here
     setInterval(shakeAll, newSettings.speed, counterList[counterList.length - 1], counterList.length - 1, element, defaultSettingsShakeList[defaultSettingsShakeList.length - 1]);
     return self;
   };
@@ -260,6 +261,7 @@ function MoveThatDiv(selector){
     counter.nmb = 0;
     counterList.push(counter);
 
+    //Sets the interval so the effect is able to move, parameters of the moveGradientAll function are put here
     setInterval(moveGradientAll, newSettings.speed, counterList[counterList.length - 1], counterList.length - 1, element, defaultSettingsGradientList[defaultSettingsGradientList.length - 1]);
     return self;
   };
