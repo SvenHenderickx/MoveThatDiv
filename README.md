@@ -1,7 +1,7 @@
 # MoveThatDiv
 A pure javascript library which you can use to shake and add gradients to html elements.
 
-[Live preview](http://i318943.iris.fhict.nl/MoveThatDiv/)
+[Live preview](https://svenhenderickx.nl/semester4/projects/MoveThatDiv/)
 
 ## Functions
 You can use the customShake and customGradient to make your elements move without any trouble, you can also add in your own parameters to create your own custom movement, speed and colors.
